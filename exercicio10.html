@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 10 - RFEC</title>
+</head>
+<body>
+    <h1>Recife Frontend Community - Evento</h1>
+    <div id="resultado"></div>
+    
+    <h2>Ranking das Palestras (Mais popular para Menos popular)</h2>
+    <ol id="ranking"></ol>
+
+    <script>
+        const palestras = [
+            { nome: 'React', part: 80 }, { nome: 'Angular', part: 45 },
+            { nome: 'Vue', part: 30 }, { nome: 'IA para Devs', part: 120 },
+            { nome: 'Carreira em Tecnologia', part: 95 }, { nome: 'UX/UI Design', part: 55 },
+            { nome: 'Backend com Java', part: 110 }
+        ];
+
+        const totalParticipantes = palestras.reduce((acc, p) => acc + p.part, 0);
+        const mediaParticipantes = totalParticipantes / palestras.length;
+
+        let maisPopular = palestras[0];
+        let menosPopular = palestras[0];
+        const maisDe90 = palestras.filter(p => p.part > 90).length;
+
+        palestras.forEach(p => {
+            if (p.part > maisPopular.part) maisPopular = p;
+            if (p.part < menosPopular.part) menosPopular = p;
+        });
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Total de Participantes do Evento:</strong> ${totalParticipantes}</p>
+            <p><strong>Média de Participantes por Palestra:</strong> ${mediaParticipantes.toFixed(1)}</p>
+            <p><strong>Palestra Mais Popular:</strong> ${maisPopular.nome} (${maisPopular.part})</p>
+            <p><strong>Palestra Menos Popular:</strong> ${menosPopular.nome} (${menosPopular.part})</p>
+            <p><strong>Palestras com mais de 90 participantes:</strong> ${maisDe90}</p>
+        `;
+
+        // Gerando o Ranking (Ordenação Decrescente)
+        const rankingOrdenado = [...palestras].sort((a, b) => b.part - a.part);
+        const listaRanking = document.getElementById('ranking');
+        
+        rankingOrdenado.forEach(p => {
+            const item = document.createElement('li');
+            item.textContent = `${p.nome} - ${p.part} participantes`;
+            listaRanking.appendChild(item);
+        });
+    </script>
+</body>
+</html>

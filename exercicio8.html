@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 8 - Pizzaria</title>
+</head>
+<body>
+    <h1>Controle de Pedidos - Pizzaria</h1>
+    <div id="resultado"></div>
+
+    <script>
+        const pizzas = [
+            { sabor: 'Calabresa', preco: 45 }, { sabor: 'Portuguesa', preco: 52 },
+            { sabor: 'Frango com Catupiry', preco: 58 }, { sabor: 'Quatro Queijos', preco: 55 },
+            { sabor: 'Marguerita', preco: 48 }, { sabor: 'Bacon Especial', preco: 62 },
+            { sabor: 'Chocolate', preco: 40 }
+        ];
+
+        const faturamento = pizzas.reduce((acc, p) => acc + p.preco, 0);
+        const valorMedio = faturamento / pizzas.length;
+
+        let maisCara = pizzas[0];
+        let maisBarata = pizzas[0];
+        const superior50 = pizzas.filter(p => p.preco > 50).length;
+
+        pizzas.forEach(p => {
+            if (p.preco > maisCara.preco) maisCara = p;
+            if (p.preco < maisBarata.preco) maisBarata = p;
+        });
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Faturamento da Noite:</strong> R$ ${faturamento.toFixed(2)}</p>
+            <p><strong>Pizza Mais Cara:</strong> ${maisCara.sabor} (R$ ${maisCara.preco.toFixed(2)})</p>
+            <p><strong>Pizza Mais Barata:</strong> ${maisBarata.sabor} (R$ ${maisBarata.preco.toFixed(2)})</p>
+            <p><strong>Valor Médio dos Pedidos:</strong> R$ ${valorMedio.toFixed(2)}</p>
+            <p><strong>Pedidos com valor superior a R$ 50:</strong> ${superior50}</p>
+        `;
+    </script>
+</body>
+</html>

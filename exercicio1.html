@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 1 - Lava Jato</title>
+</head>
+<body>
+    <h1>Controle de Valores Recuperados - Lava Jato</h1>
+    <div id="resultado"></div>
+
+    <script>
+        const apreensoes = [125000, 87500, 230000, 56000, 145000, 78000, 310000, 95500];
+        
+        const total = apreensoes.reduce((acc, val) => acc + val, 0);
+        const media = total / apreensoes.length;
+        const maior = Math.max(...apreensoes);
+        const menor = Math.min(...apreensoes);
+        const maisDe100k = apreensoes.filter(val => val > 100000).length;
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Valor Total Recuperado:</strong> R$ ${total.toFixed(2)}</p>
+            <p><strong>Média das Apreensões:</strong> R$ ${media.toFixed(2)}</p>
+            <p><strong>Maior Apreensão:</strong> R$ ${maior.toFixed(2)}</p>
+            <p><strong>Menor Apreensão:</strong> R$ ${menor.toFixed(2)}</p>
+            <p><strong>Apreensões acima de R$ 100.000:</strong> ${maisDe100k}</p>
+        `;
+    </script>
+</body>
+</html>

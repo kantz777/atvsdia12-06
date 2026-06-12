@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 6 - Feira de Tecnologia</title>
+</head>
+<body>
+    <h1>Controle de Inscrições - Feira de Tecnologia</h1>
+    <div id="resultado"></div>
+
+    <script>
+        const palestras = [
+            { tema: 'IA Generativa', inscritos: 120 }, { tema: 'Java Moderno', inscritos: 85 },
+            { tema: 'React Avançado', inscritos: 95 }, { tema: 'Cibersegurança', inscritos: 60 },
+            { tema: 'Cloud Computing', inscritos: 140 }, { tema: 'Desenvolvimento Mobile', inscritos: 75 }
+        ];
+
+        const totalInscritos = palestras.reduce((acc, p) => acc + p.inscritos, 0);
+        const mediaInscritos = totalInscritos / palestras.length;
+
+        let maisInscritos = palestras[0];
+        let menosInscritos = palestras[0];
+        const maisDe100 = palestras.filter(p => p.inscritos > 100).length;
+
+        palestras.forEach(p => {
+            if (p.inscritos > maisInscritos.inscritos) maisInscritos = p;
+            if (p.inscritos < menosInscritos.inscritos) menosInscritos = p;
+        });
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Total de Inscritos:</strong> ${totalInscritos}</p>
+            <p><strong>Média de Participantes por Palestra:</strong> ${mediaInscritos.toFixed(1)}</p>
+            <p><strong>Palestra com Mais Inscritos:</strong> ${maisInscritos.tema} (${maisInscritos.inscritos})</p>
+            <p><strong>Palestra com Menos Inscritos:</strong> ${menosInscritos.tema} (${menosInscritos.inscritos})</p>
+            <p><strong>Palestras que ultrapassaram 100 participantes:</strong> ${maisDe100}</p>
+        `;
+    </script>
+</body>
+</html>

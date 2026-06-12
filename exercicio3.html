@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 3 - Loja de Games</title>
+</head>
+<body>
+    <h1>Relatório de Vendas - Loja de Games</h1>
+    <div id="resultado"></div>
+
+    <script>
+        const jogos = [
+            { nome: 'FIFA 27', preco: 350 }, { nome: 'GTA VI', preco: 420 },
+            { nome: 'Minecraft', preco: 120 }, { nome: 'EA FC 27', preco: 380 },
+            { nome: 'Call of Duty', preco: 310 }, { nome: 'Red Dead Redemption 2', preco: 280 },
+            { nome: 'The Witcher 4', preco: 450 }
+        ];
+
+        const faturamento = jogos.reduce((acc, j) => acc + j.preco, 0);
+        const mediaPreco = faturamento / jogos.length;
+        
+        let maisCaro = jogos[0];
+        let maisBarato = jogos[0];
+        const maisDe300 = jogos.filter(j => j.preco > 300).length;
+
+        jogos.forEach(j => {
+            if (j.preco > maisCaro.preco) maisCaro = j;
+            if (j.preco < maisBarato.preco) maisBarato = j;
+        });
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Faturamento Total:</strong> R$ ${faturamento.toFixed(2)}</p>
+            <p><strong>Valor Médio dos Produtos:</strong> R$ ${mediaPreco.toFixed(2)}</p>
+            <p><strong>Jogo Mais Caro:</strong> ${maisCaro.nome} (R$ ${maisCaro.preco.toFixed(2)})</p>
+            <p><strong>Jogo Mais Barato:</strong> ${maisBarato.nome} (R$ ${maisBarato.preco.toFixed(2)})</p>
+            <p><strong>Jogos vendidos por mais de R$ 300:</strong> ${maisDe300}</p>
+        `;
+    </script>
+</body>
+</html>

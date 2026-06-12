@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 5 - Agência de Turismo</title>
+</head>
+<body>
+    <h1>Pacotes de Viagem</h1>
+    <div id="resultado"></div>
+
+    <script>
+        const pacotes = [
+            { destino: 'Recife', dias: 5, valor: 1500 },
+            { destino: 'Gramado', dias: 7, valor: 3200 },
+            { destino: 'Salvador', dias: 4, valor: 1800 },
+            { destino: 'Rio de Janeiro', dias: 6, valor: 2500 },
+            { destino: 'Porto Seguro', dias: 5, valor: 2100 },
+            { destino: 'Fernando de Noronha', dias: 4, valor: 4500 }
+        ];
+
+        const totalPacotes = pacotes.length;
+        const valorTotal = pacotes.reduce((acc, p) => acc + p.valor, 0);
+        const valorMedio = valorTotal / totalPacotes;
+
+        let maisCaro = pacotes[0];
+        let maisBarato = pacotes[0];
+        let superior2000 = [];
+        let duracaoCincoOuMais = 0;
+        let todosDestinos = [];
+
+        pacotes.forEach(p => {
+            todosDestinos.push(p.destino);
+            if (p.valor > maisCaro.valor) maisCaro = p;
+            if (p.valor < maisBarato.valor) maisBarato = p;
+            if (p.valor > 2000) superior2000.push(p.destino);
+            if (p.dias >= 5) duracaoCincoOuMais++;
+        });
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Destinos Cadastrados:</strong> ${todosDestinos.join(', ')}</p>
+            <p><strong>Quantidade de Pacotes:</strong> ${totalPacotes}</p>
+            <p><strong>Valor Total dos Pacotes:</strong> R$ ${valorTotal.toFixed(2)}</p>
+            <p><strong>Valor Médio dos Pacotes:</strong> R$ ${valorMedio.toFixed(2)}</p>
+            <p><strong>Destino Mais Caro:</strong> ${maisCaro.destino} (R$ ${maisCaro.valor.toFixed(2)})</p>
+            <p><strong>Destino Mais Barato:</strong> ${maisBarato.destino} (R$ ${maisBarato.valor.toFixed(2)})</p>
+            <p><strong>Destinos com valor superior a R$ 2.000:</strong> ${superior2000.join(', ')}</p>
+            <p><strong>Pacotes com 5 dias ou mais de duração:</strong> ${duracaoCincoOuMais}</p>
+        `;
+    </script>
+</body>
+</html>

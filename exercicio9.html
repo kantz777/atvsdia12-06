@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 9 - Cinema</title>
+</head>
+<body>
+    <h1>Relatório de Público - Cinema</h1>
+    <div id="resultado"></div>
+
+    <script>
+        const filmes = [
+            { titulo: 'Vingadores', ingressos: 150 }, { titulo: 'Avatar', ingressos: 120 },
+            { titulo: 'Jurassic World', ingressos: 90 }, { titulo: 'Minecraft', ingressos: 180 },
+            { titulo: 'Superman', ingressos: 140 }, { titulo: 'Missão Impossível', ingressos: 110 }
+        ];
+
+        const totalIngressos = filmes.reduce((acc, f) => acc + f.ingressos, 0);
+        const mediaPublico = totalIngressos / filmes.length;
+
+        let maisAssistido = filmes[0];
+        let menosAssitido = filmes[0];
+        const maisDe130 = filmes.filter(f => f.ingressos > 130).length;
+
+        filmes.forEach(f => {
+            if (f.ingressos > maisAssistido.ingressos) maisAssistido = f;
+            if (f.ingressos < menosAssitido.ingressos) menosAssitido = f;
+        });
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Total de Ingressos Vendidos:</strong> ${totalIngressos}</p>
+            <p><strong>Filme Mais Assistido:</strong> ${maisAssistido.titulo} (${maisAssistido.ingressos})</p>
+            <p><strong>Filme Menos Assistido:</strong> ${menosAssitido.titulo} (${menosAssitido.ingressos})</p>
+            <p><strong>Média de Público por Filme:</strong> ${mediaPublico.toFixed(1)}</p>
+            <p><strong>Filmes que ultrapassaram 130 espectadores:</strong> ${maisDe130}</p>
+        `;
+    </script>
+</body>
+</html>

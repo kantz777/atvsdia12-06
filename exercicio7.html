@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 7 - Biblioteca</title>
+</head>
+<body>
+    <h1>Empréstimos de Livros - Biblioteca</h1>
+    <div id="resultado"></div>
+
+    <script>
+        const categorias = [
+            { nome: 'Programação', qtd: 12 }, { nome: 'Matemática', qtd: 8 },
+            { nome: 'Ficção', qtd: 15 }, { nome: 'História', qtd: 10 },
+            { nome: 'Biografia', qtd: 5 }, { nome: 'Ciências', qtd: 11 },
+            { nome: 'Tecnologia', qtd: 14 }
+        ];
+
+        const totalLivros = categorias.reduce((acc, c) => acc + c.qtd, 0);
+        const mediaEmprestimos = totalLivros / categorias.length;
+
+        let maisProcurada = categorias[0];
+        let menosProcurada = categorias[0];
+        const maisDe10 = categorias.filter(c => c.qtd > 10).length;
+
+        categorias.forEach(c => {
+            if (c.qtd > maisProcurada.qtd) maisProcurada = c;
+            if (c.qtd < menosProcurada.qtd) menosProcurada = c;
+        });
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Total de Livros Emprestados:</strong> ${totalLivros}</p>
+            <p><strong>Categoria Mais Procurada:</strong> ${maisProcurada.nome} (${maisProcurada.qtd})</p>
+            <p><strong>Categoria Menos Procurada:</strong> ${menosProcurada.nome} (${menosProcurada.qtd})</p>
+            <p><strong>Média de Empréstimos por Categoria:</strong> ${mediaEmprestimos.toFixed(1)}</p>
+            <p><strong>Categorias com mais de 10 empréstimos:</strong> ${maisDe10}</p>
+        `;
+    </script>
+</body>
+</html>

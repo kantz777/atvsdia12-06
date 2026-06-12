@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 4 - Hospital</title>
+</head>
+<body>
+    <h1>Controle de Atendimentos - Hospital</h1>
+    <div id="resultado"></div>
+
+    <script>
+        const tempos = [15, 22, 10, 35, 18, 27, 12, 40, 16, 25];
+
+        const totalTempo = tempos.reduce((acc, t) => acc + t, 0);
+        const mediaTempo = totalTempo / tempos.length;
+        const maiorTempo = Math.max(...tempos);
+        const menorTempo = Math.min(...tempos);
+        const maisDe20Min = tempos.filter(t => t > 20).length;
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Tempo Médio de Espera:</strong> ${mediaTempo.toFixed(1)} minutos</p>
+            <p><strong>Maior Tempo Registrado:</strong> ${maiorTempo} minutos</p>
+            <p><strong>Menor Tempo Registrado:</strong> ${menorTempo} minutos</p>
+            <p><strong>Pacientes que aguardaram mais de 20 minutos:</strong> ${maisDe20Min}</p>
+        `;
+    </script>
+</body>
+</html>

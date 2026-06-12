@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 2 - Brasileirão</title>
+</head>
+<body>
+    <h1>Estatísticas do Campeonato Brasileiro</h1>
+    <div id="resultado"></div>
+
+    <script>
+        const times = [
+            { nome: 'Sport', gols: 3 }, { nome: 'Náutico', gols: 1 },
+            { nome: 'Santa Cruz', gols: 2 }, { nome: 'Ceará', gols: 4 },
+            { nome: 'Fortaleza', gols: 2 }, { nome: 'Bahia', gols: 5 },
+            { nome: 'Vitória', gols: 1 }, { nome: 'CRB', gols: 3 }
+        ];
+
+        const totalGols = times.reduce((acc, t) => acc + t.gols, 0);
+        const mediaGols = totalGols / times.length;
+        
+        let maisGols = times[0];
+        let menosGols = times[0];
+        let maisDeDoisGols = [];
+
+        times.forEach(t => {
+            if (t.gols > maisGols.gols) maisGols = t;
+            if (t.gols < menosGols.gols) menosGols = t;
+            if (t.gols > 2) maisDeDoisGols.push(t.nome);
+        });
+
+        document.getElementById('resultado').innerHTML = `
+            <p><strong>Total de Gols na Rodada:</strong> ${totalGols}</p>
+            <p><strong>Média de Gols por Equipe:</strong> ${mediaGols.toFixed(2)}</p>
+            <p><strong>Time que marcou mais gols:</strong> ${maisGols.nome} (${maisGols.gols})</p>
+            <p><strong>Time que marcou menos gols:</strong> ${menosGols.nome} (${menosGols.gols})</p>
+            <p><strong>Equipes com mais de 2 gols:</strong> ${maisDeDoisGols.join(', ')}</p>
+        `;
+    </script>
+</body>
+</html>
